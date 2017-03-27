@@ -1,0 +1,234 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.tianshi.dao.ShowInfoDao" >
+  <resultMap id="BaseResultMap" type="com.tianshi.domain.ShowInfo" >
+    <id column="id" property="id" jdbcType="VARCHAR" />
+    <result column="title" property="title" jdbcType="VARCHAR" />
+    <result column="stage" property="stage" jdbcType="VARCHAR" />
+    <result column="time" property="time" jdbcType="TIMESTAMP" />
+    <result column="keyword" property="keyword" jdbcType="VARCHAR" />
+    <result column="financing_money" property="financingMoney" jdbcType="VARCHAR" />
+    <result column="financing_percent" property="financingPercent" jdbcType="VARCHAR" />
+    <result column="work_method" property="workMethod" jdbcType="VARCHAR" />
+    <result column="pay_out" property="payOut" jdbcType="VARCHAR" />
+    <result column="patent" property="patent" jdbcType="VARCHAR" />
+    <result column="info" property="info" jdbcType="VARCHAR" />
+    <result column="t_info" property="tInfo" jdbcType="VARCHAR" />
+    <result column="market" property="market" jdbcType="VARCHAR" />
+    <result column="t_advance" property="tAdvance" jdbcType="VARCHAR" />
+    <result column="owner" property="owner" jdbcType="VARCHAR" />
+    <result column="tag" property="tag" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    id, title, stage, time, keyword, financing_money, financing_percent, work_method, 
+    pay_out, patent, info, t_info, market, t_advance, owner, tag
+  </sql>
+  <select id="getAllRes" resultMap="BaseResultMap" >
+    select
+    <include refid="Base_Column_List" />
+    from show_info
+  </select>
+  <select id="getAllByUserName" resultMap="BaseResultMap" parameterType="java.lang.String">
+    select
+    <include refid="Base_Column_List" />
+    from show_info
+    where owner=#{username,jdbcType=VARCHAR}
+  </select>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from show_info
+    where id = #{id,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String" >
+    delete from show_info
+    where id = #{id,jdbcType=VARCHAR}
+  </delete>
+  <insert id="insert" parameterType="com.tianshi.domain.ShowInfo" >
+    insert into show_info (id, title, stage, 
+      time, keyword, financing_money, 
+      financing_percent, work_method, pay_out, 
+      patent, info, t_info, 
+      market, t_advance, owner, 
+      tag)
+    values (#{id,jdbcType=VARCHAR}, #{title,jdbcType=VARCHAR}, #{stage,jdbcType=VARCHAR},
+      #{time,jdbcType=TIMESTAMP}, #{keyword,jdbcType=VARCHAR}, #{financingMoney,jdbcType=VARCHAR}, 
+      #{financingPercent,jdbcType=VARCHAR}, #{workMethod,jdbcType=VARCHAR}, #{payOut,jdbcType=VARCHAR}, 
+      #{patent,jdbcType=VARCHAR}, #{info,jdbcType=VARCHAR}, #{tInfo,jdbcType=VARCHAR}, 
+      #{market,jdbcType=VARCHAR}, #{tAdvance,jdbcType=VARCHAR}, #{owner,jdbcType=VARCHAR}, 
+      #{tag,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.tianshi.domain.ShowInfo" >
+    insert into show_info
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        id,
+      </if>
+      <if test="title != null" >
+        title,
+      </if>
+      <if test="stage != null" >
+        stage,
+      </if>
+      <if test="time != null" >
+        time,
+      </if>
+      <if test="keyword != null" >
+        keyword,
+      </if>
+      <if test="financingMoney != null" >
+        financing_money,
+      </if>
+      <if test="financingPercent != null" >
+        financing_percent,
+      </if>
+      <if test="workMethod != null" >
+        work_method,
+      </if>
+      <if test="payOut != null" >
+        pay_out,
+      </if>
+      <if test="patent != null" >
+        patent,
+      </if>
+      <if test="info != null" >
+        info,
+      </if>
+      <if test="tInfo != null" >
+        t_info,
+      </if>
+      <if test="market != null" >
+        market,
+      </if>
+      <if test="tAdvance != null" >
+        t_advance,
+      </if>
+      <if test="owner != null" >
+        owner,
+      </if>
+      <if test="tag != null" >
+        tag,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=VARCHAR},
+      </if>
+      <if test="title != null" >
+        #{title,jdbcType=VARCHAR},
+      </if>
+      <if test="stage != null" >
+        #{stage,jdbcType=VARCHAR},
+      </if>
+      <if test="time != null" >
+        #{time,jdbcType=TIMESTAMP},
+      </if>
+      <if test="keyword != null" >
+        #{keyword,jdbcType=VARCHAR},
+      </if>
+      <if test="financingMoney != null" >
+        #{financingMoney,jdbcType=VARCHAR},
+      </if>
+      <if test="financingPercent != null" >
+        #{financingPercent,jdbcType=VARCHAR},
+      </if>
+      <if test="workMethod != null" >
+        #{workMethod,jdbcType=VARCHAR},
+      </if>
+      <if test="payOut != null" >
+        #{payOut,jdbcType=VARCHAR},
+      </if>
+      <if test="patent != null" >
+        #{patent,jdbcType=VARCHAR},
+      </if>
+      <if test="info != null" >
+        #{info,jdbcType=VARCHAR},
+      </if>
+      <if test="tInfo != null" >
+        #{tInfo,jdbcType=VARCHAR},
+      </if>
+      <if test="market != null" >
+        #{market,jdbcType=VARCHAR},
+      </if>
+      <if test="tAdvance != null" >
+        #{tAdvance,jdbcType=VARCHAR},
+      </if>
+      <if test="owner != null" >
+        #{owner,jdbcType=VARCHAR},
+      </if>
+      <if test="tag != null" >
+        #{tag,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.tianshi.domain.ShowInfo" >
+    update show_info
+    <set >
+      <if test="title != null" >
+        title = #{title,jdbcType=VARCHAR},
+      </if>
+      <if test="stage != null" >
+        stage = #{stage,jdbcType=VARCHAR},
+      </if>
+      <if test="time != null" >
+        time = #{time,jdbcType=TIMESTAMP},
+      </if>
+      <if test="keyword != null" >
+        keyword = #{keyword,jdbcType=VARCHAR},
+      </if>
+      <if test="financingMoney != null" >
+        financing_money = #{financingMoney,jdbcType=VARCHAR},
+      </if>
+      <if test="financingPercent != null" >
+        financing_percent = #{financingPercent,jdbcType=VARCHAR},
+      </if>
+      <if test="workMethod != null" >
+        work_method = #{workMethod,jdbcType=VARCHAR},
+      </if>
+      <if test="payOut != null" >
+        pay_out = #{payOut,jdbcType=VARCHAR},
+      </if>
+      <if test="patent != null" >
+        patent = #{patent,jdbcType=VARCHAR},
+      </if>
+      <if test="info != null" >
+        info = #{info,jdbcType=VARCHAR},
+      </if>
+      <if test="tInfo != null" >
+        t_info = #{tInfo,jdbcType=VARCHAR},
+      </if>
+      <if test="market != null" >
+        market = #{market,jdbcType=VARCHAR},
+      </if>
+      <if test="tAdvance != null" >
+        t_advance = #{tAdvance,jdbcType=VARCHAR},
+      </if>
+      <if test="owner != null" >
+        owner = #{owner,jdbcType=VARCHAR},
+      </if>
+      <if test="tag != null" >
+        tag = #{tag,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where id = #{id,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.tianshi.domain.ShowInfo" >
+    update show_info
+    set title = #{title,jdbcType=VARCHAR},
+      stage = #{stage,jdbcType=VARCHAR},
+      time = #{time,jdbcType=TIMESTAMP},
+      keyword = #{keyword,jdbcType=VARCHAR},
+      financing_money = #{financingMoney,jdbcType=VARCHAR},
+      financing_percent = #{financingPercent,jdbcType=VARCHAR},
+      work_method = #{workMethod,jdbcType=VARCHAR},
+      pay_out = #{payOut,jdbcType=VARCHAR},
+      patent = #{patent,jdbcType=VARCHAR},
+      info = #{info,jdbcType=VARCHAR},
+      t_info = #{tInfo,jdbcType=VARCHAR},
+      market = #{market,jdbcType=VARCHAR},
+      t_advance = #{tAdvance,jdbcType=VARCHAR},
+      owner = #{owner,jdbcType=VARCHAR},
+      tag = #{tag,jdbcType=VARCHAR}
+    where id = #{id,jdbcType=VARCHAR}
+  </update>
+</mapper>

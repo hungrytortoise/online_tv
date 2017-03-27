@@ -1,0 +1,202 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.tianshi.dao.DemondDao" >
+  <resultMap id="BaseResultMap" type="com.tianshi.domain.Demond" >
+    <id column="id" property="id" jdbcType="VARCHAR" />
+    <result column="owner" property="owner" jdbcType="VARCHAR" />
+    <result column="time" property="time" jdbcType="TIMESTAMP" />
+    <result column="keyword" property="keyword" jdbcType="VARCHAR" />
+    <result column="c_kind" property="cKind" jdbcType="VARCHAR" />
+    <result column="term" property="term" jdbcType="VARCHAR" />
+    <result column="min_money" property="minMoney" jdbcType="VARCHAR" />
+    <result column="max_money" property="maxMoney" jdbcType="VARCHAR" />
+    <result column="target" property="target" jdbcType="VARCHAR" />
+    <result column="company" property="company" jdbcType="VARCHAR" />
+    <result column="phone" property="phone" jdbcType="VARCHAR" />
+  </resultMap>
+  <resultMap id="ResultMapWithBLOBs" type="com.tianshi.domain.Demond" extends="BaseResultMap" >
+    <result column="data" property="data" jdbcType="LONGVARCHAR" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    id, owner, time, keyword, c_kind, term, min_money, max_money, target,company,phone
+  </sql>
+  <sql id="Blob_Column_List" >
+    data
+  </sql>
+  <select id="getAll" resultMap="ResultMapWithBLOBs">
+    select
+    <include refid="Base_Column_List" />
+    ,
+    <include refid="Blob_Column_List" />
+    from demond_info
+  </select>
+  <select id="getAllById" resultMap="ResultMapWithBLOBs" parameterType="java.lang.String" >
+    select
+    <include refid="Base_Column_List" />
+    ,
+    <include refid="Blob_Column_List" />
+    from demond_info
+    where owner = #{username,jdbcType=VARCHAR}
+  </select>
+  <select id="selectByPrimaryKey" resultMap="ResultMapWithBLOBs" parameterType="java.lang.String" >
+    select 
+    <include refid="Base_Column_List" />
+    ,
+    <include refid="Blob_Column_List" />
+    from demond_info
+    where id = #{id,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String" >
+    delete from demond_info
+    where id = #{id,jdbcType=VARCHAR}
+  </delete>
+  <insert id="insert" parameterType="com.tianshi.domain.Demond" >
+    insert into demond_info (id, owner, time, 
+      keyword, c_kind, term, 
+      min_money, max_money, target,company,phone,
+      data)
+    values (#{id,jdbcType=VARCHAR}, #{owner,jdbcType=VARCHAR}, #{time,jdbcType=TIMESTAMP}, 
+      #{keyword,jdbcType=VARCHAR}, #{cKind,jdbcType=VARCHAR}, #{term,jdbcType=VARCHAR}, 
+      #{minMoney,jdbcType=VARCHAR}, #{maxMoney,jdbcType=VARCHAR}, #{target,jdbcType=VARCHAR},
+      #{company,jdbcType=VARCHAR}, #{phone,jdbcType=VARCHAR},
+      #{data,jdbcType=LONGVARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.tianshi.domain.Demond" >
+    insert into demond_info
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        id,
+      </if>
+      <if test="owner != null" >
+        owner,
+      </if>
+      <if test="time != null" >
+        time,
+      </if>
+      <if test="keyword != null" >
+        keyword,
+      </if>
+      <if test="cKind != null" >
+        c_kind,
+      </if>
+      <if test="term != null" >
+        term,
+      </if>
+      <if test="minMoney != null" >
+        min_money,
+      </if>
+      <if test="maxMoney != null" >
+        max_money,
+      </if>
+      <if test="target != null" >
+        target,
+      </if>
+      <if test="company != null" >
+        company,
+      </if>
+      <if test="data != null" >
+        data,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=VARCHAR},
+      </if>
+      <if test="owner != null" >
+        #{owner,jdbcType=VARCHAR},
+      </if>
+      <if test="company != null" >
+        company,
+      </if>
+      <if test="time != null" >
+        #{time,jdbcType=TIMESTAMP},
+      </if>
+      <if test="keyword != null" >
+        #{keyword,jdbcType=VARCHAR},
+      </if>
+      <if test="cKind != null" >
+        #{cKind,jdbcType=VARCHAR},
+      </if>
+      <if test="term != null" >
+        #{term,jdbcType=VARCHAR},
+      </if>
+      <if test="minMoney != null" >
+        #{minMoney,jdbcType=VARCHAR},
+      </if>
+      <if test="maxMoney != null" >
+        #{maxMoney,jdbcType=VARCHAR},
+      </if>
+      <if test="target != null" >
+        #{target,jdbcType=VARCHAR},
+      </if>
+      <if test="data != null" >
+        #{data,jdbcType=LONGVARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.tianshi.domain.Demond" >
+    update demond_info
+    <set >
+      <if test="owner != null" >
+        owner = #{owner,jdbcType=VARCHAR},
+      </if>
+      <if test="time != null" >
+        time = #{time,jdbcType=TIMESTAMP},
+      </if>
+      <if test="keyword != null" >
+        keyword = #{keyword,jdbcType=VARCHAR},
+      </if>
+      <if test="cKind != null" >
+        c_kind = #{cKind,jdbcType=VARCHAR},
+      </if>
+      <if test="company != null" >
+        company,
+      </if>
+      <if test="term != null" >
+        term = #{term,jdbcType=VARCHAR},
+      </if>
+      <if test="minMoney != null" >
+        min_money = #{minMoney,jdbcType=VARCHAR},
+      </if>
+      <if test="maxMoney != null" >
+        max_money = #{maxMoney,jdbcType=VARCHAR},
+      </if>
+      <if test="target != null" >
+        target = #{target,jdbcType=VARCHAR},
+      </if>
+      <if test="data != null" >
+        data = #{data,jdbcType=LONGVARCHAR},
+      </if>
+    </set>
+    where id = #{id,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKeyWithBLOBs" parameterType="com.tianshi.domain.Demond" >
+    update demond_info
+    set owner = #{owner,jdbcType=VARCHAR},
+      time = #{time,jdbcType=TIMESTAMP},
+      keyword = #{keyword,jdbcType=VARCHAR},
+      c_kind = #{cKind,jdbcType=VARCHAR},
+      term = #{term,jdbcType=VARCHAR},
+      min_money = #{minMoney,jdbcType=VARCHAR},
+      max_money = #{maxMoney,jdbcType=VARCHAR},
+      target = #{target,jdbcType=VARCHAR},
+      company = #{company,jdbcType=VARCHAR},
+      phone = #{phone,jdbcType=VARCHAR},
+      data = #{data,jdbcType=LONGVARCHAR}
+    where id = #{id,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.tianshi.domain.Demond" >
+    update demond_info
+    set owner = #{owner,jdbcType=VARCHAR},
+      time = #{time,jdbcType=TIMESTAMP},
+      keyword = #{keyword,jdbcType=VARCHAR},
+      c_kind = #{cKind,jdbcType=VARCHAR},
+      term = #{term,jdbcType=VARCHAR},
+      min_money = #{minMoney,jdbcType=VARCHAR},
+      max_money = #{maxMoney,jdbcType=VARCHAR},
+      company = #{company,jdbcType=VARCHAR},
+      phone = #{phone,jdbcType=VARCHAR},
+      target = #{target,jdbcType=VARCHAR}
+    where id = #{id,jdbcType=VARCHAR}
+  </update>
+</mapper>
